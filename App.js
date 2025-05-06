@@ -1,15 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
 export default function App() {
+
+  const [enteredGoalText, setEnteredGoalText] = useState('');
+  const [courseGoals, setCourseGoals] = useState([]);
+  const goalInputHandler = (enteredText) => {
+    setEnteredGoalText(enteredText);
+  };
+  const addGoalHandler = () => {
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
+      enteredGoalText,
+    ]);
+    setEnteredGoalText('');
+  };
+  const deleteGoalHandler = (id) => {
+    setCourseGoals((currentCourseGoals) => {
+      const updatedCourseGoals = [...currentCourseGoals];
+      updatedCourseGoals.splice(id, 1);
+      return updatedCourseGoals;
+
+    });
+  };
+  // const [isAddMode, setIsAddMode] = useState(false);
+  // const cancelGoalAdditionHandler = () => {
+  //   setIsAddMode(false);
+  // };
+  // };
+  // const addGoalHandler = (enteredGoalText) => {
+  //   setCourseGoals((currentCourseGoals) => [
+  //     ...currentCourseGoals, { id: Math.random().toString(), text: enteredGoalText },
+  //   ]);  
+
   return (
     <View style={styles.appContainer}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.TextInput} placeholder="Insira uma tarefa" />
-        <Button title='Inserir' /> 
+        <TextInput style={styles.TextInput} placeholder="Insira uma tarefa"  onChangeText={goalInputHandler} value={enteredGoalText} />
+        <Button title='Inserir' onPress={addGoalHandler} /> 
       </View>
       <View style={styles.goalsContainer}>
-        <Text>Lista de tarefas</Text>
+      {courseGoals.map((goal, index) =>
+        <View key={index} style={{ padding: 8, marginVertical: 4, backgroundColor: '#ccc', borderRadius: 6 }}>
+          <Text>{goal}</Text>
+          <Button title="Delete" onPress={() => deleteGoalHandler(index)} />
+        </View>
+      )}
       </View>
     </View>
     
