@@ -23,15 +23,6 @@ export default function App() {
 
     });
   };
-  // const [isAddMode, setIsAddMode] = useState(false);
-  // const cancelGoalAdditionHandler = () => {
-  //   setIsAddMode(false);
-  // };
-  // };
-  // const addGoalHandler = (enteredGoalText) => {
-  //   setCourseGoals((currentCourseGoals) => [
-  //     ...currentCourseGoals, { id: Math.random().toString(), text: enteredGoalText },
-  //   ]);  
 
   return (
     <View style={styles.appContainer}>
