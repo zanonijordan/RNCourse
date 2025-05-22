@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ScrollView } from 'react-native';
 
 export default function App() {
 
@@ -32,10 +32,10 @@ export default function App() {
       </View>
       <View style={styles.goalsContainer}>
       {courseGoals.map((goal, index) =>
-        <View key={index} style={{ padding: 8, marginVertical: 4, backgroundColor: '#ccc', borderRadius: 6 }}>
+        <ScrollView key={index} style={styles.TextInput}>
           <Text>{goal}</Text>
           <Button title="Delete" onPress={() => deleteGoalHandler(index)} />
-        </View>
+        </ScrollView>
       )}
       </View>
     </View>
